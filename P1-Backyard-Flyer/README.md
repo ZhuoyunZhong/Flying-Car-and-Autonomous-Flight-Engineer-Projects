@@ -1,6 +1,10 @@
 # Backyard Flyer
 
-![Introduction](./demonstration/P1.gif)
+## Demonstration
+
+Video demonstration
+
+[![Introduction](./demonstration/P1.gif)](https://youtu.be/qt2QmzCzKhg)
 
 ## Overview
 
