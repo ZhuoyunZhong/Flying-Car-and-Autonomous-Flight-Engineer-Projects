@@ -16,12 +16,17 @@ To run this project, additional resources are required as follows:
 
 - Download [Udacity FCND Simulator](https://github.com/udacity/FCND-Simulator-Releases/releases)
 - Follow the instruction [Starter-Kit](https://github.com/udacity/FCND-Term1-Starter-Kit) to set up propriate environment.
+- Switch to `fcnd` environment by `$ source activate fcnd`
 
 After installing, start the simulator and run BACKYARD FLYER. Run python code by
 
 `python backyard_flyer.py`
 
 One should be able to see the quadrotor moving as desired.
+
+If one would like to fly its quadrotor with the code, run 
+
+`python backyard_flyer_robot.py`
 
 ## Project Detail
 
