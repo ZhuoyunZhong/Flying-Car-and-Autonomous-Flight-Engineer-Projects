@@ -78,7 +78,7 @@ class BackyardFlyer(Drone):
             if self.armed and self.guided:
                 self.takeoff_transition()
         elif self.flight_state == States.DISARMING:
-            if not self.armed:
+            if not self.armed and not self.guided:
                 self.manual_transition()
 
     def calculate_box(self, target_side=1.0, target_altitude=3.0):
