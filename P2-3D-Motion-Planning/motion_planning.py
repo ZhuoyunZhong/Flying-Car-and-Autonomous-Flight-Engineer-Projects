@@ -132,11 +132,11 @@ class MotionPlanning(Drone):
         # global_position = self.global_position
  
         # TODO: convert to current local position using global_to_local()
-        self.local_position = global_to_local(self.global_position, self.global_home)
-        north, east = int(self.local_position[0]), int(self.local_position[1])
+        local_pos = global_to_local(self.global_position, self.global_home)
+        north, east = int(local_pos[0]), int(local_pos[1])
         
-        print('global home {0}, position {1}, local position {2}'.format(self.global_home, self.global_position,
-                                                                         self.local_position))
+        print('global home {0}, position {1}, new local position {2}'.format(self.global_home, self.global_position,
+                                                                             local_pos))
         # Read in obstacle map
         data = np.loadtxt('colliders.csv', delimiter=',', dtype='Float64', skiprows=2)
         
@@ -151,8 +151,9 @@ class MotionPlanning(Drone):
         # Set goal as some arbitrary position on the grid
         # grid_goal = (-north_offset + 20, -east_offset + 10)
         # TODO: adapt to set goal as latitude / longitude position and convert
-        ll_goal = (-100, 50, 0)
+        ll_goal = (-122.397249, 37.793893, 0)
         local_goal = global_to_local(ll_goal, self.global_home)
+        print(local_goal)
         grid_goal = (int(local_goal[0]) - north_offset, int(local_goal[1]) - east_offset)
 
         # Run A* to find a path from start to goal
@@ -162,8 +163,8 @@ class MotionPlanning(Drone):
         path, _ = a_star(grid, heuristic, grid_start, grid_goal)
         # TODO: prune path to minimize number of waypoints
         # TODO (if you're feeling ambitious): Try a different approach altogether!
-        pruned_path = prune_path(path)
         print('Original path length: ', len(path))
+        pruned_path = prune_path(grid, path)
         print('Pruned path length: ', len(pruned_path))
 
         # Show the 2D result
@@ -175,9 +176,9 @@ class MotionPlanning(Drone):
             p = np.array(path)
             pp = np.array(pruned_path)
             plt.plot(pp[:, 1], pp[:, 0], 'b')
-            plt.scatter(pp[:, 1], pp[:, 0], 'b')
+            plt.scatter(pp[:, 1], pp[:, 0])
             plt.plot(p[:, 1], p[:, 0], 'g')
-            plt.scatter(p[:, 1], p[:, 0], 'g')
+            plt.scatter(p[:, 1], p[:, 0])
 
         plt.xlabel('EAST')
         plt.ylabel('NORTH')
@@ -201,6 +202,7 @@ class MotionPlanning(Drone):
         #    pass
 
         self.stop_log()
+        plt.show()
 
 
 if __name__ == "__main__":

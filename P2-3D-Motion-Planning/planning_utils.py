@@ -55,10 +55,10 @@ class Action(Enum):
     EAST = (0, 1, 1)
     NORTH = (-1, 0, 1)
     SOUTH = (1, 0, 1)
-    NORTHEAST = (1, 1, 1.4142)
-    NORTHWEST = (-1, 1, 1.4142)
-    SOUTHEAST = (1, -1, 1.4142)
-    SOUTHWEST = (-1, -1, 1.4142)
+    NORTHEAST = (-1, 1, 1.4142)
+    NORTHWEST = (-1, -1, 1.4142)
+    SOUTHEAST = (1, 1, 1.4142)
+    SOUTHWEST = (1, -1, 1.4142)
 
     @property
     def cost(self):
@@ -89,13 +89,13 @@ def valid_actions(grid, current_node):
     if y + 1 > m or grid[x, y + 1] == 1:
         valid_actions.remove(Action.EAST)
     
-    if x + 1 > n or y + 1 > m or grid[x+1, y+1] == 1:
-        valid_actions.remove(Action.NORTHEAST)
     if x - 1 < 0 or y + 1 > m or grid[x-1, y+1] == 1:
         valid_actions.remove(Action.NORTHEAST)
-    if x + 1 > n or y - 1 < 0 or grid[x+1, y-1] == 1:
-        valid_actions.remove(Action.SOUTHEAST)
     if x - 1 < 0 or y - 1 < 0 or grid[x-1, y-1] == 1:
+        valid_actions.remove(Action.NORTHWEST)
+    if x + 1 > n or y + 1 > m or grid[x+1, y+1] == 1:
+        valid_actions.remove(Action.SOUTHEAST)
+    if x + 1 > n or y - 1 < 0 or grid[x+1, y-1] == 1:
         valid_actions.remove(Action.SOUTHWEST)
 
     return valid_actions
@@ -159,7 +159,7 @@ def heuristic(position, goal_position):
 
 
 # Use both collinear and Bresenham
-def prune_path(path):
+def prune_path(grid, path):
     if path is not None:
         pruned_path = [p for p in path]
     else:
@@ -176,7 +176,7 @@ def prune_path(path):
             pruned_path.remove(pruned_path[i+1])
         else:
             # Bresenham 
-            if bresenham_check(p1, p3):
+            if bresenham_check(grid, p1, p3):
                 pruned_path.remove(pruned_path[i+1])
             else:
                 i += 1
