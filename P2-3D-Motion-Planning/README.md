@@ -21,6 +21,10 @@ After installing, start the simulator and run MOTION PLANNING. Run python code b
 
 One should be able to see the quadrotor lifting, spending some time planning and moving following a planned path.
 
+One could also set his own goal by
+
+`python motion_planning.py -g "(-122.397249, 37.793893, 0)"`
+
 ## Project Detail
 
 The key functionality of the motion planning is included in files `motion_planning.py` and `planning_tils.py`

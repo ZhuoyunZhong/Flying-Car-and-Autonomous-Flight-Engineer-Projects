@@ -25,9 +25,11 @@ class States(Enum):
 
 class MotionPlanning(Drone):
 
-    def __init__(self, connection):
+    def __init__(self, connection, goal):
         super().__init__(connection)
 
+        self.ll_goal = None
+        self.get_goal_from_str(goal)
         self.target_position = np.array([0.0, 0.0, 0.0])
         self.waypoints = []
         self.in_mission = True
@@ -112,6 +114,17 @@ class MotionPlanning(Drone):
         data = msgpack.dumps(self.waypoints)
         self.connection._master.write(data)
 
+    def get_goal_from_str(self, goal):
+        goal = goal.replace(" ", "")
+        goal = goal.replace("(", "")
+        goal = goal.replace(")", "")
+        coordinate = goal.split(",")
+        lon, lat, height = coordinate[0], coordinate[1], 0
+        if len(coordinate) == 3:
+            height = coordinate[2]
+        self.goal = (float(lon), float(lat), float(height))
+        print("Goal Coordinates ", self.goal)
+
     def plan_path(self):
         self.flight_state = States.PLANNING
         print("Searching for a path ...")
@@ -151,8 +164,7 @@ class MotionPlanning(Drone):
         # Set goal as some arbitrary position on the grid
         # grid_goal = (-north_offset + 20, -east_offset + 10)
         # TODO: adapt to set goal as latitude / longitude position and convert
-        ll_goal = (-122.397249, 37.793893, 0)
-        local_goal = global_to_local(ll_goal, self.global_home)
+        local_goal = global_to_local(self.goal, self.global_home)
         print(local_goal)
         grid_goal = (int(local_goal[0]) - north_offset, int(local_goal[1]) - east_offset)
 
@@ -209,10 +221,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--port', type=int, default=5760, help='Port number')
     parser.add_argument('--host', type=str, default='127.0.0.1', help="host address, i.e. '127.0.0.1'")
+    parser.add_argument('-g', '--goal', type=str, default='(-122.397249, 37.793893, 0)', 
+                                        help="goal location, i.e. '(-122.397249, 37.793893, 0)'")
     args = parser.parse_args()
 
     conn = MavlinkConnection('tcp:{0}:{1}'.format(args.host, args.port), timeout=60)
-    drone = MotionPlanning(conn)
+    drone = MotionPlanning(conn, args.goal)
     time.sleep(1)
 
     drone.start()
