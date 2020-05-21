@@ -31,3 +31,17 @@ This project is to plan a 3D path for the quadrotor to follow.
   		<img src="./demonstration/P2.gif"/>
     </a>
 </p>
+
+
+
+### 3. [Control A 3D Quadrotor](https://github.com/joeyzhong90595/Flying-Car-and-Autonomous-Flight-Engineer-Projects/tree/master/P3-Control-A-3D-Quadrotor)
+
+This project is to build a cascaded controller to control a 3D quadrotor.
+
+#### Video demonstration:
+
+<p align="center">
+    <a href="https://youtu.be/AGDbQazFgzU">
+  		<img src="./demonstration/P3.gif"/>
+    </a>
+</p>
