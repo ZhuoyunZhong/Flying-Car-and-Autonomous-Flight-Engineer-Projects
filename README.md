@@ -5,6 +5,7 @@
 ## Finished projects:
 - 1, Backyard Flyer 
 - 2, 3D Motion Planning
+- 3, Control A 3D Quadrotor
 
 ## Demonstration
 
