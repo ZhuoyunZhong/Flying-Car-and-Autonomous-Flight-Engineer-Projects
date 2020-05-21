@@ -20,7 +20,7 @@ This project is to navigate a quadrotor to perform a "square" move in the air.
     </a>
 </p>
 
-### [3D Motion Planning](https://github.com/joeyzhong90595/Flying-Car-and-Autonomous-Flight-Engineer-Projects/tree/master/P2-3D-Motion-Planning)
+### 2. [3D Motion Planning](https://github.com/joeyzhong90595/Flying-Car-and-Autonomous-Flight-Engineer-Projects/tree/master/P2-3D-Motion-Planning)
 
 This project is to plan a 3D path for the quadrotor to follow. 
 
