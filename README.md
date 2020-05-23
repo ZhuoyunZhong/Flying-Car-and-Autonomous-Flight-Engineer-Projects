@@ -6,6 +6,7 @@
 - 1, Backyard Flyer 
 - 2, 3D Motion Planning
 - 3, Control A 3D Quadrotor
+- 4, Estimation
 
 ## Demonstration
 
@@ -44,5 +45,19 @@ This project is to build a cascaded controller to control a 3D quadrotor.
 <p align="center">
     <a href="https://youtu.be/AGDbQazFgzU">
   		<img src="./demonstration/P3.gif"/>
+    </a>
+</p>
+
+
+
+### 4. [Estimation](https://github.com/joeyzhong90595/Flying-Car-and-Autonomous-Flight-Engineer-Projects/tree/master/P4-Estimation)
+
+This project is to build a EKF estimator to estimate the state of a quadrotor.
+
+#### Video demonstration:
+
+<p align="center">
+    <a href="https://youtu.be/qw0V_ZVRSns">
+  		<img src="./demonstration/P4.gif"/>
     </a>
 </p>
